@@ -1,2 +1,2 @@
-public class Grafo {
+public abstract class Grafo<Tipo>{
 }
