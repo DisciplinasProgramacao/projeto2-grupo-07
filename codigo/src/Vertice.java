@@ -33,7 +33,7 @@ public class Vertice {
      * Construtor para criação de vértice identificado
      * @param id Número/id do vértice a ser criado (atributo final).
      */
-    public Vertice(int id){
+    public Vertice(int id) {
         this.id = id;
         this.arestas = new ABB<Aresta>();
         this.visitado = false;
@@ -48,13 +48,13 @@ public class Vertice {
     }
     
     public boolean addAresta(int destino){
-        return false;
+        return this.arestas.add(destino, new Aresta(destino));
     }
 
     /**
      * Adiciona uma aresta ponderada neste vértice para um destino
      * @param peso Peso da aresta 
-     * @param dest Vértice de destino
+     * @param destino Vértice de destino
      * @return TRUE se foi inserida, FALSE caso já existisse e não foi inserida.
      */
     public boolean addAresta(int destino, int peso){
@@ -63,8 +63,8 @@ public class Vertice {
 
     
     public Aresta existeAresta(int destino){
-        return null;
-
+        Aresta aresta = this.arestas.find(destino);
+        return aresta;
     }
     
     /**
@@ -78,7 +78,7 @@ public class Vertice {
   
   
     public int grau(){
-        return Integer.MIN_VALUE;
+        return this.arestas.size();
     }
 
     /**
