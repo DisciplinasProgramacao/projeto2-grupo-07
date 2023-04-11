@@ -23,9 +23,10 @@ public class App {
 
     	System.out.println("Selecione uma das opções abaixo:"
        			+ "\n [1]Gerar grafico pelo Console;"
-       			+ "\n [2]Carregar grafo de um arquivo;");
+       			+ "\n [2]Carregar grafo de um arquivo;"
+       			+ "\n [3]Gerar grafo completo;");
     	int i = ng.nextInt();
-    	if (i!=1 && i!=2) {		//Opção Default 
+    	if (i!=1 && i!=2 && i!=3) {		//Opção Default 
     		return 1;
     	}else {
     		return i;
@@ -38,58 +39,50 @@ public class App {
 		Scanner mc = new Scanner(System.in);
 
     	System.out.println("Selecione uma das opções abaixo:"
-    			+ "\n[1]Gerar grafo completo;"
-    			+ "\n[2]Verificar se é completo;"
-    			+ "\n[3]Gerar subgrafo;"
-    			+ "\n[4]Salvar grafo;"
-    			+ "\n[5]Imprimir grafo;"
-    			+ "\n[6]Busca em largura;"
-    			+ "\n[7]Busca em profundidade;"
+    			+ "\n[1]Verificar se é completo;"
+    			+ "\n[2]Gerar subgrafo;"
+    			+ "\n[3]Salvar grafo;"
+    			+ "\n[4]Imprimir grafo;"
+    			+ "\n[5]Busca em largura;"
+    			+ "\n[6]Busca em profundidade;"
     			+ "\n[0]Sair;");
     	int i = mc.nextInt();
-    	if (i!=1 && i!=2 && i!=3 && i!=4 && i!=5 && i!=6 && i!=7 && i!=0) {		//Opção Default 
+    	if (i!=1 && i!=2 && i!=3 && i!=4 && i!=5 && i!=6 && i!=0) {		//Opção Default 
     		return 0;
     	}else {
     		return i;
     	}
-    }
-    
-    public static void menuGrafo(String nome,String tipo) throws FileNotFoundException {
+    } 
+    public static void menuGrafoD(String nome) throws FileNotFoundException {
     	clearConsole();
         @SuppressWarnings("resource")
 		Scanner mg = new Scanner(System.in);
-
-    	switch (tipo) {
-			case "D":
-				GrafoDirecionado grafo = new GrafoDirecionado(nome);
-				break;
-			case "ND":
-				GrafoNaoDirecionado grafo = new GrafoNaoDirecionado(nome);
-				break;
-    	}
-    	System.out.println("Menu Grafo:");
+        
+		GrafoDirecionado grafo = new GrafoDirecionado(nome);
+    	System.out.println("Menu Grafo Direcionado:");
     	int i = novoGrafo();
-    	clearConsole();
-		if(i==1) {		//Criar pelo console
-    		//#######################
-    		grafo.CriaGrafo();
-    		//#######################
-    	}else {			//Carregar grafo
-    		System.out.println("Qual é o nome do Arquivo?");
-    		String NomeArq = mg.nextLine();
-    		grafo.carregar(NomeArq);
-    	}
     	int tam;
+    	clearConsole();
+    	switch (i) {
+    		case 1:		//Criar pelo console
+    			System.out.println("Quantos vértices tem o grafo?");
+        		break;
+    		case 2:			//Carregar grafo
+        		System.out.println("Qual é o nome do Arquivo?");
+        		String NomeArq = mg.nextLine();
+        		grafo.carregar(NomeArq);
+        		break;
+    		case 3:			//Gerar Grafo Completo
+    			System.out.println("Digite a quantidade de Vértices do Grafo:");
+    			tam = mg.nextInt();
+    			grafo = (GrafoDirecionado) Grafo.grafoCompleto(tam);
+    			break;
+    	}
 		do{
 			i = menuComplementar();
 			clearConsole();
 		    switch (i){
-	    		case 1:			//Gerar Grafo Completo
-	    			System.out.println("Digite a quantidade de Vértices do Grafo:");
-	    			tam = mg.nextInt();
-	    			grafo.grafoCompleto(tam);
-	    			break;
-	    		case 2:			//Verificar se é completo
+	    		case 1:			//Verificar se é completo
 	    			Boolean completo = grafo.completo();
 	    			if(completo) {
 	    				System.out.println("O grafo É Completo!");
@@ -97,7 +90,7 @@ public class App {
 	    				System.out.println("O grafo Não É Completo!");
 	    			}
 	    			break;
-	    		case 3:			//Gerar Subgrafo
+	    		case 2:			//Gerar Subgrafo
 	    			tam = grafo.tamanho();
 	    			int b, c; 
 	    			LinkedList<Integer> vertices = new LinkedList<>();
@@ -116,16 +109,90 @@ public class App {
 	    			}
 	    			grafo.subGrafo(vertices);
 	    			break;
-	    		case 4:			//Salvar Grafo
+	    		case 3:			//Salvar Grafo
 	    			System.out.println("Qual é o nome do Arquivo?");
 	        		String NomeArq = mg.nextLine();
 	        		grafo.salvar(NomeArq);
 	    			break;
-	    		case 5:			//Imprimir Grafo
+	    		case 4:			//Imprimir Grafo
 	    			break;
-	    		case 6:			//Busca Em Largura
+	    		case 5:			//Busca Em Largura
 	    			break;
-	    		case 7:			//Busca Em Profundidade
+	    		case 6:			//Busca Em Profundidade
+	    			break;
+	    		case 0:			//Sair
+	    			break;
+		    	}
+		}while(i!=0);	 
+    }
+    public static void menuGrafoND(String nome) throws FileNotFoundException {
+    	clearConsole();
+        @SuppressWarnings("resource")
+		Scanner mg = new Scanner(System.in);
+  
+		GrafoNaoDirecionado grafo = new GrafoNaoDirecionado(nome);
+    	System.out.println("Menu Grafo Não Direcionado:");
+    	int i = novoGrafo();
+    	int tam;
+    	clearConsole();
+    	switch (i) {
+    		case 1:		//Criar pelo console
+        		//#######################
+        		grafo.CriaGrafo();
+        		//#######################
+        		break;
+    		case 2:			//Carregar grafo
+        		System.out.println("Qual é o nome do Arquivo?");
+        		String NomeArq = mg.nextLine();
+        		grafo.carregar(NomeArq);
+        		break;
+    		case 3:			//Gerar Grafo Completo
+    			System.out.println("Digite a quantidade de Vértices do Grafo:");
+    			tam = mg.nextInt();
+    			grafo = (GrafoNaoDirecionado) Grafo.grafoCompleto(tam);
+    			break;
+    	}
+		do{
+			i = menuComplementar();
+			clearConsole();
+		    switch (i){
+	    		case 1:			//Verificar se é completo
+	    			Boolean completo = grafo.completo();
+	    			if(completo) {
+	    				System.out.println("O grafo É Completo!");
+	    			}else{
+	    				System.out.println("O grafo Não É Completo!");
+	    			}
+	    			break;
+	    		case 2:			//Gerar Subgrafo
+	    			tam = grafo.tamanho();
+	    			int b, c; 
+	    			LinkedList<Integer> vertices = new LinkedList<>();
+	    			for (int a = 0;a < tam; a++) {
+	    				b = a++;
+	    				System.out.println("Deseja manter o Vertice: "+b
+	    						+"\n[1]Sim;"
+                                +"\n[2]Não;");
+	    				c = mg.nextInt();
+	    				switch (c) {
+	    					case 2:
+	    						break;
+	    					default:
+	    						vertices.add(b);
+	    				}		
+	    			}
+	    			grafo.subGrafo(vertices);
+	    			break;
+	    		case 3:			//Salvar Grafo
+	    			System.out.println("Qual é o nome do Arquivo?");
+	        		String NomeArq = mg.nextLine();
+	        		grafo.salvar(NomeArq);
+	    			break;
+	    		case 4:			//Imprimir Grafo
+	    			break;
+	    		case 5:			//Busca Em Largura
+	    			break;
+	    		case 6:			//Busca Em Profundidade
 	    			break;
 	    		case 0:			//Sair
 	    			break;
@@ -146,10 +213,10 @@ public class App {
     	clearConsole();
     	switch (op) {
     		case 1:
-    			menuGrafo(nome,"D");
+    			menuGrafoD(nome);
     			break;
     		default:
-    			menuGrafo(nome,"ND");
+    			menuGrafoND(nome);
     	}
     }
     
