@@ -22,7 +22,11 @@
  * SOFTWARE.
  */
 
- /** Classe Vertice para um grafo */
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/** Classe Vertice para um grafo */
 public class Vertice {
     
     private ABB<Aresta> arestas;    
@@ -101,5 +105,12 @@ public class Vertice {
      */
     public boolean visitado(){
         return this.visitado;
+    }
+
+    public List<Integer> vizinhos() {
+        List<Integer> vizinhos = new ArrayList<Integer>();
+        Arrays.stream(arestas.allElements(new Aresta[arestas.size()]))
+                .forEach(aresta -> vizinhos.add(aresta.destino()));
+        return vizinhos;
     }
 }
