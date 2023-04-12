@@ -1,4 +1,4 @@
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 public class App {
@@ -53,7 +53,7 @@ public class App {
     		return i;
     	}
     } 
-    public static void menuGrafoD(String nome) throws FileNotFoundException {
+    public static void menuGrafoD(String nome) throws IOException {
     	clearConsole();
         @SuppressWarnings("resource")
 		Scanner mg = new Scanner(System.in);
@@ -65,7 +65,29 @@ public class App {
     	clearConsole();
     	switch (i) {
     		case 1:		//Criar pelo console
-    			System.out.println("Quantos vértices tem o grafo?");
+    			System.out.println("O Grafo possui quantas arestas?");
+    			int na =  mg.nextInt();
+    			for (int j = 0; j< na; j++) {		//Faz para cada aresta.
+    				clearConsole();
+					System.out.println("Qual é o vétice de Origem?");
+	    			int origem  =  mg.nextInt();
+	    			System.out.println("Qual é o vétice de Destino?");
+	    			int destino  =  mg.nextInt();
+	    			System.out.println("A aresta tem peso?"
+	    					+ "\n [1]Sim"
+	    					+ "\n [2]Não");
+	    			int temPeso  =  mg.nextInt();
+	    			int peso;
+	    			switch (temPeso) {
+	    				case 1:
+	    					System.out.println("Qual é o peso da aresta?");
+	    					peso =  mg.nextInt();
+	    					grafo.addAresta(origem, destino,peso);
+	    					break;
+	    				default:
+	    					grafo.addAresta(origem, destino);
+	    			}        			
+    			}
         		break;
     		case 2:			//Carregar grafo
         		System.out.println("Qual é o nome do Arquivo?");
@@ -125,7 +147,7 @@ public class App {
 		    	}
 		}while(i!=0);	 
     }
-    public static void menuGrafoND(String nome) throws FileNotFoundException {
+    public static void menuGrafoND(String nome) throws IOException {
     	clearConsole();
         @SuppressWarnings("resource")
 		Scanner mg = new Scanner(System.in);
@@ -137,9 +159,29 @@ public class App {
     	clearConsole();
     	switch (i) {
     		case 1:		//Criar pelo console
-        		//#######################
-        		grafo.CriaGrafo();
-        		//#######################
+    			System.out.println("O Grafo possui quantas arestas ?");
+    			int na =  mg.nextInt();
+    			for (int j = 0; j< na; j++) {		//Faz para cada aresta.
+    				clearConsole();
+					System.out.println("Qual é o vétice de Origem?");
+	    			int origem  =  mg.nextInt();
+	    			System.out.println("Qual é o vétice de Destino?");
+	    			int destino  =  mg.nextInt();
+	    			System.out.println("A aresta tem peso?"
+	    					+ "\n [1]Sim"
+	    					+ "\n [2]Não");
+	    			int temPeso  =  mg.nextInt();
+	    			int peso;
+	    			switch (temPeso) {
+	    				case 1:
+	    					System.out.println("Qual é o peso da aresta?");
+	    					peso =  mg.nextInt();
+	    					grafo.addAresta(origem, destino,peso);
+	    					break;
+	    				default:
+	    					grafo.addAresta(origem, destino);
+	    			}        			
+    			}
         		break;
     		case 2:			//Carregar grafo
         		System.out.println("Qual é o nome do Arquivo?");
@@ -200,7 +242,7 @@ public class App {
 		}while(i!=0);	 
     }
        
-    public static void menuPrincipal() throws FileNotFoundException {
+    public static void menuPrincipal() throws IOException {
     	clearConsole();
     	@SuppressWarnings("resource")
 		Scanner mp = new Scanner(System.in);
@@ -220,7 +262,7 @@ public class App {
     	}
     }
     
-    public static void main(String[] args) throws FileNotFoundException{
+    public static void main(String[] args) throws IOException{
     	@SuppressWarnings("resource")
 		Scanner mm = new Scanner(System.in);
 
