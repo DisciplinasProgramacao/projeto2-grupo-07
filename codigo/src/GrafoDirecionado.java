@@ -25,6 +25,47 @@ public class GrafoDirecionado extends GrafoMutavel {
     }
 
     @Override
+    public Grafo bfs(int idVerticeInicio) {
+        GrafoMutavel grafo = new GrafoDirecionado();
+        vertices.find(idVerticeInicio).visitar();
+        bfs(grafo, idVerticeInicio);
+        return grafo;
+    }
+
+    private void bfs(GrafoMutavel grafo, int idVertice) {
+        if (!vertices.find(idVertice).visitado())
+            return;
+        List<Integer> vizinhos = vertices.find(idVertice).vizinhos();
+        grafo.addVertice(idVertice);
+    }
+
+    @Override
+    public Grafo dfs(int idVerticeInicio) {
+        GrafoMutavel grafo = new GrafoDirecionado();
+        vertices.find(idVerticeInicio).visitar();
+        grafo.addVertice(idVerticeInicio);
+        List<Integer> vizinhos = vertices.find(idVerticeInicio).vizinhos();
+        vizinhos.forEach(vizinho -> {
+            if (!this.vertices.find(vizinho).visitado())
+               dfs(grafo ,idVerticeInicio);
+        });
+        return grafo;
+    }
+
+    private void dfs(GrafoMutavel grafo, int idVertice) {
+        if (this.vertices.find(idVertice).visitado())
+            return;
+        List<Integer> vizinhos = vertices.find(idVertice).vizinhos();
+        vizinhos.forEach(vizinho -> {
+            if (!this.vertices.find(vizinho).visitado()) {
+                grafo.addVertice(vizinho);
+                grafo.addAresta(idVertice, vizinho);
+                dfs(grafo, vizinho);
+            }
+        });
+    }
+
+    @Override
     public boolean addAresta(int origem, int destino, int peso) {
         return this.vertices.find(origem).addAresta(destino, peso);
     }

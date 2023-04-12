@@ -82,4 +82,7 @@ public abstract class Grafo {
         return this.vertices.size();
     }
 
+    public abstract Grafo bfs(int idVerticeInicio);
+
+    public abstract Grafo dfs(int idVerticeInicio);
 }

@@ -31,4 +31,14 @@ public class GrafoCompleto extends Grafo {
     public Grafo subGrafo(List<Integer> vertices){
         return new GrafoCompleto("Subgrafo de " + this.nome, vertices);
     }
+
+    @Override
+    public Grafo bfs(int idVerticeInicio) {
+        return this;
+    }
+
+    @Override
+    public Grafo dfs(int idVerticeInicio) {
+        return this;
+    }
 }
