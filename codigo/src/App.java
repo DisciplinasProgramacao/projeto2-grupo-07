@@ -61,7 +61,7 @@ public class App {
 		GrafoDirecionado grafo = new GrafoDirecionado(nome);
     	System.out.println("Menu Grafo Direcionado:");
     	int i = novoGrafo();
-    	int tam;
+    	int tam,init;
     	clearConsole();
     	switch (i) {
     		case 1:		//Criar pelo console
@@ -139,8 +139,14 @@ public class App {
 	    		case 4:			//Imprimir Grafo
 	    			break;
 	    		case 5:			//Busca Em Largura
+	    			System.out.println("Qual é o vertice de início da Busca em Largura?");
+	        		init = mg.nextInt();
+	        		grafo.bfs(init);
 	    			break;
 	    		case 6:			//Busca Em Profundidade
+	    			System.out.println("Qual é o vertice de início da Busca em Profundidade?");
+	    			init = mg.nextInt();
+	        		grafo.dfs(init);
 	    			break;
 	    		case 0:			//Sair
 	    			break;
@@ -155,7 +161,7 @@ public class App {
 		GrafoNaoDirecionado grafo = new GrafoNaoDirecionado(nome);
     	System.out.println("Menu Grafo Não Direcionado:");
     	int i = novoGrafo();
-    	int tam;
+    	int tam,init;
     	clearConsole();
     	switch (i) {
     		case 1:		//Criar pelo console
@@ -233,8 +239,14 @@ public class App {
 	    		case 4:			//Imprimir Grafo
 	    			break;
 	    		case 5:			//Busca Em Largura
+	    			System.out.println("Qual é o vertice de início da Busca em Largura?");
+	        		init = mg.nextInt();
+	        		grafo.bfs(init);
 	    			break;
 	    		case 6:			//Busca Em Profundidade
+	    			System.out.println("Qual é o vertice de início da Busca em Profundidade?");
+	    			init = mg.nextInt();
+	        		grafo.dfs(init);
 	    			break;
 	    		case 0:			//Sair
 	    			break;
